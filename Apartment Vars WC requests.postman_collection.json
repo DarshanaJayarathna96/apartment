@@ -1,0 +1,71 @@
+{
+	"info": {
+		"_postman_id": "7f7dc913-c5d4-4b22-ae56-11008977ff07",
+		"name": "Apartment Vars WC requests",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "https://appartementvars.fr/wp-json/wc/v3/orders",
+			"request": {
+				"auth": {
+					"type": "oauth1",
+					"oauth1": [
+						{
+							"key": "addParamsToHeader",
+							"value": false,
+							"type": "boolean"
+						},
+						{
+							"key": "includeBodyHash",
+							"value": false,
+							"type": "boolean"
+						},
+						{
+							"key": "consumerSecret",
+							"value": "cs_574df9a514463bd5c3588a74c034efd14b9c6fa1",
+							"type": "string"
+						},
+						{
+							"key": "consumerKey",
+							"value": "ck_c21c76f3032f8cc74f9b79353192bfd04b222ecd",
+							"type": "string"
+						},
+						{
+							"key": "signatureMethod",
+							"value": "HMAC-SHA1",
+							"type": "string"
+						},
+						{
+							"key": "version",
+							"value": "1.0",
+							"type": "string"
+						},
+						{
+							"key": "addEmptyParamsToSign",
+							"value": false,
+							"type": "boolean"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://appartementvars.fr/wp-json/wc/v3/orders",
+					"protocol": "https",
+					"host": [
+						"appartementvars",
+						"fr"
+					],
+					"path": [
+						"wp-json",
+						"wc",
+						"v3",
+						"orders"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
