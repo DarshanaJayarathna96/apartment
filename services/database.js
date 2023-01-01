@@ -260,7 +260,23 @@ export const addBooking = async (json) => {
 export const addRoom = async (json) => {
   try {
     const availability = json.availability || [];
-    const roomAvailability = new RoomAvailability({avail_date: availability, room_name: json.room_name, room_address: json.address});
+    const availabilityArray = [];
+
+    var getDaysArray = function(s,e) {for(var a=[],d=new Date(s);d<=new Date(e);d.setDate(d.getDate()+1)){ a.push(new Date(d));}return a;};
+    let daylist = getDaysArray(new Date(), new Date(new Date().setFullYear(new Date().getFullYear() + 1)));
+
+    daylist = daylist.map((v)=>{
+      if(availability.length > 0) {
+        const unavailabilityDate = availability.find(el => el === moment(v).format("yyyy-MM-DD"));
+        if(!unavailabilityDate) {
+          return availabilityArray.push(moment(v).format("yyyy-MM-DD"));
+        }
+      } else {
+        return availabilityArray.push(moment(v).format("yyyy-MM-DD"));
+      }
+    });
+    
+    const roomAvailability = new RoomAvailability({avail_date: availabilityArray, room_name: json.room_name, room_address: json.address});
     await roomAvailability.save();
     const room = new Room({ ...json, roomAvailability_id: roomAvailability._id});
     const roomData = await room.save();
