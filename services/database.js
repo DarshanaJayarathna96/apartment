@@ -15,6 +15,7 @@ import RoomAvailableRef from "../models/roomAvilableRef.model.js";
 import RoomAvailability from "../models/roomAvalibility.model.js";
 import BookingAdvance from "../models/bookingAdvance.model.js";
 import BookingAddOn from "../models/bookingAddOn.model.js";
+import moment from "moment";
 // const Booking = require("../models/booking.model");
 
 // const conn = createConnection(config);
@@ -438,6 +439,10 @@ export const updateRoom = async (json) => {
 
 export const search = async (table, query) => {
   try {
+    // await RoomAvailability.deleteMany({});
+    // await Room.deleteMany({});
+    // await Booking.deleteMany({});
+    // await Guest.deleteMany({});
     if(table === "room") {
       if(query.date) {
         if(query) {
