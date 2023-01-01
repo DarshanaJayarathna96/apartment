@@ -24,6 +24,7 @@
     "follow-redirects": "^1.15.0",
     "https": "^1.0.0",
     "jsonwebtoken": "^8.3.0",
+    "moment": "^2.29.4",
     "mongoose": "^5.3.2",
     "multer": "^1.4.0",
     "mysql": "^2.18.1",
