@@ -289,26 +289,27 @@ export const addRoom = async (json) => {
   }
 };
 
-export const addRoomAvailability = async ({ room_id, dates, rem_dates }) => {
+export const addRoomAvailability = async ({ room_id, dates = [], rem_dates = [] }) => {
   try {
     const room = await Room.findById(room_id);
     const availabilityId = room.roomAvailability_id;
-    console.log("availabilityId");
-    console.log(availabilityId);
     const availability = await RoomAvailability.findById(availabilityId);
-    console.log("availability");
-    console.log(availability);
-    console.log("dates");
-    console.log(dates);
-    if(availability) {
-      return await RoomAvailability.findByIdAndUpdate({ _id: availabilityId }, {
-        $set: { avail_date: [...availability?.avail_date, ...dates] },
-      }, { new: true });
-    } else {
-      return await RoomAvailability.findByIdAndUpdate({ _id: availabilityId }, {
-        $set: { avail_date: dates },
+    if(availability && rem_dates.length > 0) {
+      await RoomAvailability.findByIdAndUpdate({ _id: availabilityId }, 
+        { $pull: { avail_date: { $in: [...rem_dates] }},
       }, { new: true });
     }
+    if(availability && dates.length > 0) {
+      await RoomAvailability.findByIdAndUpdate({ _id: availabilityId }, {
+        $set: { avail_date: [...availability?.avail_date, ...dates] },
+      }, { new: true });
+    }
+    //  else {
+    //   await RoomAvailability.findByIdAndUpdate({ _id: availabilityId }, {
+    //     $set: { avail_date: dates },
+    //   }, { new: true });
+    // }
+    return true;
     // await RoomAvailability.deleteOne({room_id});
     // const roomAvailability = new RoomAvailability({ room_id, avail_date: dates });
     // return await roomAvailability.save();
